@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block title %}
+        Title
+    {% endblock %}
+    </title>
+
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+</head>
+<body>
+{% block navbar %}
+<div class="flex-container">
+    <p>Home</p>
+    <p>Login</p>
+    <p>Logout</p>
+</div>
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+</body>
+</html>
