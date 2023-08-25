@@ -14,11 +14,14 @@
     />
 </head>
 <body>
+
+<!-- NAVBAR -->
 {% block navbar %}
 <div class="flex-container">
-    <p>Home</p>
-    <p>Login</p>
-    <p>Logout</p>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('login') }}">Login</a>
+    <a href="{{ url_for('register') }}">Register</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
 </div>
 
 {% endblock %}
