@@ -30,7 +30,7 @@ with app.app_context():
 def index():
     result = db.session.execute(db.Select(Product))
     all_products = result.scalars().all()
-    return render_template('index.html', products=all_products)
+    return render_template('index.html', products=all_products, current_user=current_user)
 
 
 @app.route('/register', methods=["GET"])
@@ -96,7 +96,8 @@ def login_post():
 
 @app.route('/logout')
 def logout():
-    pass
+    login_user()
+    return redirect(url_for('index'))
 
 
 @app.route('/add_product', methods=["GET"])
