@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 
 from models import db, Product
-from forms import AddProductForm, RegistrationForm
+from forms import AddProductForm, RegistrationForm, Loginform
 
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
@@ -28,10 +28,10 @@ def register_get():
     return render_template('auth/register.html', form=registration_form)
 
 
-
-@app.route('/login')
-def login():
-    pass
+@app.route('/login', methods=["GET"])
+def login_get():
+    login_form = Loginform()
+    return render_template("auth/login.html", form=login_form)
 
 
 @app.route('/logout')

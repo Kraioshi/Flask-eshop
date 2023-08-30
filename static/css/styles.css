@@ -62,3 +62,18 @@ margin-right: -5px;
     width: 30%;
     padding: 10px;
 }
+
+/* LOGIN */
+.login-text {
+    text-align: center;
+}
+
+.login-submit {
+    width: 100%;
+}
+
+.login-form {
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+}
