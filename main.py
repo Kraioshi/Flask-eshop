@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from models import db, Product
+from models import db, Product, User
 from forms import AddProductForm, RegistrationForm, Loginform
 
 app = Flask(__name__)
@@ -28,6 +29,37 @@ def register_get():
     return render_template('auth/register.html', form=registration_form)
 
 
+@app.route('/register', methods=["POST"])
+def register_post():
+    registration_form = RegistrationForm()
+
+    if registration_form.validate_on_submit():
+
+        result = db.session.execute(db.Select(User).where(User.email == registration_form.email.data))
+        existing_user = result.scalar()
+
+        if existing_user:
+            flash("Email already registered! Try new email or log in instead!")
+            return redirect(url_for('register_get'))
+
+        hashed_password = generate_password_hash(
+            registration_form.password.data,
+            method='pbkdf2:sha256',
+            salt_length=8
+        )
+
+        new_user = User(
+            name=registration_form.name.data,
+            email=registration_form.email.data,
+            password=hashed_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for('index'))
+
+
 @app.route('/login', methods=["GET"])
 def login_get():
     login_form = Loginform()
@@ -42,7 +74,7 @@ def logout():
 @app.route('/add_product', methods=["GET"])
 def add_product_get():
     add_product_form = AddProductForm()
-    return render_template('add_product.html', form=add_product_form)
+    return render_template('products/add_product.html', form=add_product_form)
 
 
 @app.route('/add_product', methods=["POST"])
@@ -66,7 +98,7 @@ def add_product_post():
 @app.route('/products/<int:product_id>', methods=["GET"])
 def product_get(product_id):
     requested_product = db.get_or_404(Product, product_id)
-    return render_template('product.html', product=requested_product)
+    return render_template('products/product.html', product=requested_product)
 
 
 @app.route('/user')

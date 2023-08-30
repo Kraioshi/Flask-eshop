@@ -43,6 +43,21 @@ margin-right: -5px;
 
 .registration-form {
     margin: auto;
+    width: 33%;
+    padding: 10px;
+}
+
+/* LOGIN */
+.login-text {
+    text-align: center;
+}
+
+.login-submit {
+    width: 100%;
+}
+
+.login-form {
+    margin: auto;
     width: 30%;
     padding: 10px;
 }
@@ -63,17 +78,9 @@ margin-right: -5px;
     padding: 10px;
 }
 
-/* LOGIN */
-.login-text {
+/* FLASH MESSAGES */
+.flash-text {
+    color: #ee6f57;
     text-align: center;
 }
 
-.login-submit {
-    width: 100%;
-}
-
-.login-form {
-    margin: auto;
-    width: 30%;
-    padding: 10px;
-}
