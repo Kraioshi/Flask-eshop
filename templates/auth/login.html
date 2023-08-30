@@ -5,6 +5,13 @@
 {% block content %}
   <div class="container justify-content: center my-3">
       <div class="login-form">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                <p class="flash-text">{{ message }}</p>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
           <h2 class="login-text">Welcome back!</h2>
             {{ render_form(form) }}
       </div>

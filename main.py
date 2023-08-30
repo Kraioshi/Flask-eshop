@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
+from flask_login import login_user, LoginManager, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db, Product, User
@@ -11,6 +12,15 @@ bootstrap = Bootstrap5(app)
 app.config["SECRET_KEY"] = 'verysecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///shop.db"
 db.init_app(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
+
 
 with app.app_context():
     db.create_all()
@@ -56,6 +66,7 @@ def register_post():
 
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
 
         return redirect(url_for('index'))
 
@@ -64,6 +75,23 @@ def register_post():
 def login_get():
     login_form = Loginform()
     return render_template("auth/login.html", form=login_form)
+
+
+@app.route('/login', methods=["POST"])
+def login_post():
+    login_form = Loginform()
+    if login_form.validate_on_submit():
+        password = login_form.password.data
+        result = db.session.execute(db.Select(User).where(User.email == login_form.email.data))
+        existing_user = result.scalar()
+
+        if not existing_user or not check_password_hash(existing_user.password, password):
+            flash("Incorrect email or password. Please try again")
+            return redirect(url_for('login_get'))
+
+        else:
+            login_user(existing_user)
+            return redirect(url_for('index'))
 
 
 @app.route('/logout')
