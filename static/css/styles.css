@@ -6,3 +6,20 @@
 .card {
 margin-right: -5px;
 }
+
+.product-title{
+    color: blue;
+}
+
+.sale-details {
+    margin-left: 25px;
+}
+
+.add-to-cart-button{
+    width: 220px;
+    margin-right: 10px;
+}
+
+.add-to-wish-list-button {
+    width: 220px;
+}
