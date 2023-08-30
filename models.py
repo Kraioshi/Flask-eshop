@@ -11,9 +11,8 @@ class Product(db.Model):
     subtitle = db.Column(db.String(250), nullable=False)
     description = db.Column(db.String)
     price = db.Column(db.Float, nullable=False)
-    in_stock = db.Column(db.Boolean, default=True)
     quantity = db.Column(db.Integer, nullable=False)
-    img_url = db.Column(db.String(250), nullable=False)
+    image_data = db.Column(db.LargeBinary, nullable=False)
 
 
 class User(db.Model, UserMixin):

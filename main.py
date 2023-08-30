@@ -119,7 +119,7 @@ def add_product_post():
             description=add_product_form.description.data,
             price=add_product_form.price.data,
             quantity=add_product_form.quantity.data,
-            img_url=add_product_form.img_url.data
+            image_data=add_product_form.image.data.read()
         )
 
         db.session.add(new_product)
