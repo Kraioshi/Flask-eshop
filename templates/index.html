@@ -10,7 +10,7 @@
             <div class="col">
                   <div class="card shadow-sm" style="width: 21rem;">
                       <a href="{{url_for('product_get', product_id=product.id)  }}">
-                    <img src="{{ product.img_url}}" height="300" class="card-img-top">
+                    <img src="{{ url_for('get_image', image_id=product.id) }}" height="300" class="card-img-top">
                           </a>
                     <div class="card-body">
                       <div style="display: flex; justify-content: space-between;">
