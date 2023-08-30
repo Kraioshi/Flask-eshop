@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db, Product, User
 from forms import AddProductForm, RegistrationForm, Loginform
+from admin import admin_only
 
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
@@ -101,12 +102,14 @@ def logout():
 
 
 @app.route('/add_product', methods=["GET"])
+@admin_only
 def add_product_get():
     add_product_form = AddProductForm()
     return render_template('products/add_product.html', form=add_product_form)
 
 
 @app.route('/add_product', methods=["POST"])
+@admin_only
 def add_product_post():
     add_product_form = AddProductForm()
     if add_product_form.validate_on_submit():
