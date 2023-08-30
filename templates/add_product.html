@@ -4,5 +4,11 @@
 {% block title %} Add Product {% endblock %}
 
 {% block content %}
-{{ render_form(form) }}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            {{ render_form(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
