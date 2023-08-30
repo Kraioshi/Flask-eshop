@@ -69,14 +69,19 @@ def product_get(product_id):
     return render_template('product.html', product=requested_product)
 
 
+@app.route('/user')
+def user():
+    return render_template('user/user.html')
+
+
 @app.route('/cart')
 def cart():
-    pass
+    return render_template('user/cart.html')
 
 
 @app.route('/wishlist')
 def wishlist():
-    pass
+    return render_template('user/wishlist.html')
 
 
 if __name__ == "__main__":
