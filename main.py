@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 
 from models import db, Product
@@ -35,10 +35,28 @@ def logout():
     pass
 
 
-@app.route('/add_product')
-def add_product():
+@app.route('/add_product', methods=["GET"])
+def add_product_get():
     add_product_form = AddProductForm()
     return render_template('add_product.html', form=add_product_form)
+
+
+@app.route('/add_product', methods=["POST"])
+def add_product_post():
+    add_product_form = AddProductForm()
+    if add_product_form.validate_on_submit():
+        new_product = Product(
+            title=add_product_form.title.data,
+            subtitle=add_product_form.subtitle.data,
+            description=add_product_form.description.data,
+            price=add_product_form.price.data,
+            quantity=add_product_form.quantity.data,
+            img_url=add_product_form.img_url.data
+        )
+
+        db.session.add(new_product)
+        db.session.commit()
+        return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
