@@ -61,5 +61,11 @@ def add_product_post():
         return redirect(url_for('index'))
 
 
+@app.route('/product/<int:product_id>', methods=["GET"])
+def product_get(product_id):
+    requested_product = db.get_or_404(Product, product_id)
+    return render_template('product.html', product=requested_product)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
