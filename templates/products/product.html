@@ -46,11 +46,13 @@
 <!--              <button type="button" class="btn btn-secondary">Add to Wish List</button>-->
 <!--            </div>-->
             <div class="col">
-                <button type="button" class="btn btn-success btn-lg add-to-cart-button">
+                <button type="button" class="btn btn-success btn-lg add-to-cart-button"
+                        onclick="window.location.href='{{ url_for('index') }}'">
                     <i class="fa-solid fa-cart-plus"></i>
                     Add to Cart
                 </button>
-                <button type="button" class="btn btn-secondary btn-lg add-to-wish-list-button">
+                <button type="button" class="btn btn-secondary btn-lg add-to-wish-list-button"
+                        onclick="window.location.href='{{ url_for('index') }}'">
                     <i class="fa-solid fa-heart"></i>
                     Add to Wish List
                 </button>
