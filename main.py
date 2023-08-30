@@ -17,7 +17,9 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    result = db.session.execute(db.Select(Product))
+    all_products = result.scalars().all()
+    return render_template('index.html', products=all_products)
 
 
 @app.route('/register')
