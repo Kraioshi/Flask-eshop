@@ -67,5 +67,15 @@ def product_get(product_id):
     return render_template('product.html', product=requested_product)
 
 
+@app.route('/cart')
+def cart():
+    pass
+
+
+@app.route('/wishlist')
+def wishlist():
+    pass
+
+
 if __name__ == "__main__":
     app.run(debug=True)
