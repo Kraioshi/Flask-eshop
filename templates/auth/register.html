@@ -1,12 +1,12 @@
 {% from "bootstrap5/form.html" import render_form %}
-{% extends 'base.html' %}
+{% from "bootstrap5/form.html" import render_field %}
 
-{% block title %} Add Product {% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
   <div class="container justify-content: center my-3">
-      <div class="add-product-form">
-          <h2 class="add-product-text">Add New Product</h2>
+      <div class="registration-form">
+          <h2 class="register-text">Registration</h2>
             {{ render_form(form) }}
       </div>
   </div>
