@@ -148,5 +148,10 @@ def wishlist():
     return render_template('user/wishlist.html')
 
 
+@app.route('/images/<int:image_id>')
+def get_image(image_id):
+    image = Product.query.get(image_id)
+    return app.response_class(image.image_data, content_type='image/jpeg')
+
 if __name__ == "__main__":
     app.run(debug=True)
