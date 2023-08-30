@@ -1,8 +1,16 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 
+from models import db
+
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///shop.db"
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 
 @app.route('/')
