@@ -19,8 +19,25 @@
                         <h5 class="card-title">{{ product.title }}</h5>
                         <p class="card-text"><b>{{ product.price }}0$</b> </p>
                       </div>
-                          <p class="card-subtitle">{{ product.subtitle }}</p>
+                      <div style="display: flex; justify-content: space-between;">
+                        <p class="card-subtitle">{{ product.subtitle }}</p>
+                      </div>
+                      <div style="display: flex">
+                          <a class="add-to-cart-anchor" href="{{url_for('index') }}">
+                              <i class="fa-solid fa-cart-plus"></i>
+                          </a>
 
+                          <a class="add-to-wish-anchor" href="{{url_for('index') }}">
+                              <i class="fa-solid fa-heart"></i>
+                          </a>
+
+                          {% if current_user.id == 1 %}
+                          <a class="delete-product-anchor"
+                              href="{{url_for('delete_product', product_id=product.id) }}">
+                              <i class="fa-solid fa-trash"></i>
+                          </a>
+                          {% endif %}
+                      </div>
                     </div>
                   </div>
             </div>

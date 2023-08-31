@@ -17,6 +17,23 @@ margin-right: -5px;
     margin-left: 25px;
 }
 
+.add-to-cart-anchor{
+    font-size: 2em;
+    margin-right: 20px;
+}
+
+.add-to-wish-anchor{
+    font-size: 2em;
+    margin-right: 20px;
+}
+
+.delete-product-anchor{
+    font-size: 2em;
+    margin-right: 20px;
+}
+
+
+
 /* CART AND WISH LIST BUTTONS */
 .add-to-cart-button{
     width: 220px;
@@ -84,3 +101,4 @@ margin-right: -5px;
     text-align: center;
 }
 
+/* HOVER */

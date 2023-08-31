@@ -154,5 +154,14 @@ def get_image(image_id):
     return app.response_class(image.image_data, content_type='image/jpeg')
 
 
+@app.route('/delete/<int:product_id>')
+def delete_product(product_id):
+    product_to_delete = db.get_or_404(Product, product_id)
+    db.session.delete(product_to_delete)
+    db.session.commit()
+    return redict(url_for('index'))
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
