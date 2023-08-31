@@ -172,5 +172,15 @@ def delete_product(product_id):
     return redirect(url_for('index'))
 
 
+@app.route('/delete_from_wishlist/<int:product_id>')
+def delete_from_wishlist(product_id):
+    product_to_delete = db.get_or_404(Product, product_id)
+    if product_to_delete in current_user.wishlist:
+        current_user.wishlist.remove(product_to_delete)
+        db.session.commit()
+
+    return redirect(url_for('wishlist'))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
