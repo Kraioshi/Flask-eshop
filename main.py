@@ -151,11 +151,14 @@ def wishlist():
 
 @app.route('/add_to_wishlist/<int:product_id>')
 def add_to_wishlist(product_id):
-    requested_product = db.get_or_404(Product, product_id)
-    if requested_product:
-        current_user.wishlist.append(requested_product)
-        db.session.commit()
-    return redirect(url_for('wishlist'))
+    if current_user.is_authenticated:
+        requested_product = db.get_or_404(Product, product_id)
+        if requested_product:
+            current_user.wishlist.append(requested_product)
+            db.session.commit()
+        return redirect(url_for('wishlist'))
+    flash("You have to be logged in to add to wishlist")
+    return redirect(url_for('login_get'))
 
 
 @app.route('/images/<int:image_id>')
