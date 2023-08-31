@@ -6,10 +6,10 @@
   <div class="card mx-3" style="width: 18rem;">
   <img src="{{ url_for('get_image', image_id=product.id) }}" class="card-img-top" width="100%" height="204px" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to Cart</a>
-    <a href="{{ url_for('delete_from_wishlist', product_id=product.id) }}" class="btn btn-primary">Delete</a>
+    <h5 class="card-title">{{ product.title }}</h5>
+    <h5 class="card-title">{{ product.price }}0 <b>$</b></h5>
+    <a href="#" class="btn btn-primary wishlist-add">Add to Cart</a>
+    <a href="{{ url_for('delete_from_wishlist', product_id=product.id) }}" class="btn btn-primary wishlist-delete">Delete</a>
   </div>
 </div>
 {% endfor %}

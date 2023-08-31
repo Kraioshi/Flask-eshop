@@ -47,6 +47,13 @@ margin-right: -5px;
     width: 220px;
 }
 
+.wishlist-add {
+    width: 125px;
+}
+
+.wishlist-delete {
+    width: 125px;
+}
 /* REMOVE LABELS */
 .form-label {
     display: none;
