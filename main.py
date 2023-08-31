@@ -146,7 +146,7 @@ def cart():
 @app.route('/wishlist')
 def wishlist():
     user_wishlist = current_user.wishlist
-    return render_template('user/wishlist.html', wishlist=user_wishlist)
+    return render_template('user/wishlist.html', wishlist_product=user_wishlist)
 
 
 @app.route('/add_to_wishlist/<int:product_id>')
