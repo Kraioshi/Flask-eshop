@@ -16,5 +16,12 @@
           <h2 class="register-text">Registration</h2>
             {{ render_form(form) }}
       </div>
+      <div class="container justify-content: center my-2"
+           style="display: flex; justify-content: center;">
+          <p style="opacity: 0.8">Already Registered?
+              <a href="{{ url_for('login_get') }}"
+                style="color: olive;">Log in</a>
+          </p>
+      </div>
   </div>
 {% endblock %}

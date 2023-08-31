@@ -157,7 +157,7 @@ def add_to_wishlist(product_id):
             current_user.wishlist.append(requested_product)
             db.session.commit()
         return redirect(url_for('wishlist'))
-    flash("You have to be logged in to add to wishlist")
+    flash("You have to be logged in to add products to wishlist")
     return redirect(url_for('login_get'))
 
 
