@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=False)
 
     wishlist = relationship('Product', secondary=wishlist_table, back_populates='wishlist_user')
-    cart = relationship('Product', secondary=wishlist_table, back_populates='cart_user')
+    cart = relationship('Product', secondary=cart_table, back_populates='cart_user')
 
 
 class Product(db.Model):
@@ -39,4 +39,4 @@ class Product(db.Model):
     image_data = db.Column(db.LargeBinary, nullable=False)
 
     wishlist_user = relationship('User', secondary=wishlist_table, back_populates='wishlist')
-    cart_user = relationship('User', secondary=wishlist_table, back_populates='cart')
+    cart_user = relationship('User', secondary=cart_table, back_populates='cart')
