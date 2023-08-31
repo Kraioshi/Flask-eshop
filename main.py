@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap5
 from flask_login import login_user, LoginManager, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models import db, Product, User
+from models import db, Product, User, Wishlist
 from forms import AddProductForm, RegistrationForm, Loginform
 from admin import admin_only
 
@@ -159,8 +159,7 @@ def delete_product(product_id):
     product_to_delete = db.get_or_404(Product, product_id)
     db.session.delete(product_to_delete)
     db.session.commit()
-    return redict(url_for('index'))
-
+    return redirect(url_for('index'))
 
 
 if __name__ == "__main__":

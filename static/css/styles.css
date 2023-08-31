@@ -18,18 +18,21 @@ margin-right: -5px;
 }
 
 .add-to-cart-anchor{
-    font-size: 2em;
+    font-size: 1.6em;
     margin-right: 20px;
+    color: blue;
 }
 
 .add-to-wish-anchor{
-    font-size: 2em;
+    font-size: 1.6em;
     margin-right: 20px;
+    color: #FF3737;
 }
 
 .delete-product-anchor{
-    font-size: 2em;
+    font-size: 1.6em;
     margin-right: 20px;
+    color: black;
 }
 
 
