@@ -4,6 +4,12 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
+wishlist_table = db.Table(
+    'wishlist_table',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('product_id', db.Integer, db.ForeignKey('products.id'))
+)
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -11,6 +17,8 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+
+    wishlist = relationship('Product', secondary=wishlist_table, back_populates='wishlist_user')
 
 
 class Product(db.Model):
@@ -23,10 +31,4 @@ class Product(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     image_data = db.Column(db.LargeBinary, nullable=False)
 
-
-class Wishlist(db.Model):
-    __tablename__ = 'wishlist'
-    id = db.Column(db.Integer, primary_key=True)
-
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    wishlist_user = relationship('User', secondary=wishlist_table, back_populates='wishlist')
