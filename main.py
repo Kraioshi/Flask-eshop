@@ -152,10 +152,8 @@ def wishlist():
 def add_to_wishlist(product_id):
     requested_product = db.get_or_404(Product, product_id)
     wishlist_item = Wishlist(
-        owner_id=current_user.id,
+        user_id=current_user.id,
         product_id=requested_product.id,
-        product_title=requested_product.title,
-        product_image=requested_product.image_data
     )
     db.session.add(wishlist_item)
     db.session.commit()

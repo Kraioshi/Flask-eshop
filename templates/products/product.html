@@ -52,7 +52,7 @@
                     Add to Cart
                 </button>
                 <button type="button" class="btn btn-secondary btn-lg add-to-wish-list-button"
-                        onclick="window.location.href='{{ url_for('index') }}'">
+                        onclick="window.location.href='{{ url_for('add_to_wishlist', product_id=product.id) }}'">
                     <i class="fa-solid fa-heart"></i>
                     Add to Wish List
                 </button>
