@@ -140,13 +140,14 @@ def user():
 
 @app.route('/cart')
 def cart():
-    return render_template('user/cart.html')
+    user_cart = current_user.cart
+    return render_template('user/cart.html', cart_products=user_cart)
 
 
 @app.route('/wishlist')
 def wishlist():
     user_wishlist = current_user.wishlist
-    return render_template('user/wishlist.html', wishlist_product=user_wishlist)
+    return render_template('user/wishlist.html', wishlist_products=user_wishlist)
 
 
 @app.route('/add_to_wishlist/<int:product_id>')
@@ -161,10 +162,25 @@ def add_to_wishlist(product_id):
     return redirect(url_for('login_get'))
 
 
-@app.route('/images/<int:image_id>')
-def get_image(image_id):
-    image = Product.query.get(image_id)
-    return app.response_class(image.image_data, content_type='image/jpeg')
+@app.route("/add_to_cart/<int:product_id>")
+def add_to_cart(product_id):
+    if current_user.is_authenticated:
+        requested_product = db.get_or_404(Product, product_id)
+        current_user.cart.append(requested_product)
+        db.session.commit()
+        return redirect(url_for('cart'))
+    flash("You have to be logged in to add products to wishlist")
+    return redirect(url_for('login_get'))
+
+
+@app.route("/delete_from_cart/<int:product_id>")
+def delete_from_cart(product_id):
+    product_to_delete = db.get_or_404(Product, product_id)
+    if product_to_delete in current_user.wishlist:
+        current_user.wishlist.remove(product_to_delete)
+        db.session.commit()
+
+    return redirect(url_for('wishlist'))
 
 
 @app.route('/delete/<int:product_id>')
@@ -183,6 +199,12 @@ def delete_from_wishlist(product_id):
         db.session.commit()
 
     return redirect(url_for('wishlist'))
+
+
+@app.route('/images/<int:image_id>')
+def get_image(image_id):
+    image = Product.query.get(image_id)
+    return app.response_class(image.image_data, content_type='image/jpeg')
 
 
 if __name__ == "__main__":
