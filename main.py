@@ -148,6 +148,20 @@ def wishlist():
     return render_template('user/wishlist.html')
 
 
+@app.route('/wishlist-add/<int:product_id>')
+def add_to_wishlist(product_id):
+    requested_product = db.get_or_404(Product, product_id)
+    wishlist_item = Wishlist(
+        owner_id=current_user.id,
+        product_id=requested_product.id,
+        product_title=requested_product.title,
+        product_image=requested_product.image_data
+    )
+    db.session.add(wishlist_item)
+    db.session.commit()
+    return redirect(url_for('wishlist'))
+
+
 @app.route('/images/<int:image_id>')
 def get_image(image_id):
     image = Product.query.get(image_id)
