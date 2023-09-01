@@ -28,10 +28,18 @@
   </div>
     {% endfor %}
     <hr>
+  {% if cart_products %}
     <h5 style="text-align: right; padding-bottom: 7px; margin-right: 5px; opacity: 75%">
       Subtotal for {{ cart_products | length }}
       items:<b> ${{ cart_products | sum('price') | round(2) }}0 </b>
     </h5>
+  {% else %}
+    <p style="text-align: center;">Your shopping cart is currently empty!</p>
+    <p style="text-align: center;">
+      <a href="{{ url_for('index') }}" style="text-decoration: none;">Click here</a>
+      to start shopping
+    </p>
+  {% endif %}
 
 </div>
   <hr>
