@@ -1,6 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+
+<div class="container" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;
+                              padding-top: 10px; margin-top: 10px; max-width: 60%;">
+  <h3>Shopping Cart</h3>
+  <hr>
+  {% for product in cart_products %}
+  <div class="row" style="max-width: 1000px;">
+    <div class="col-sm-6 col-md-4">
+      <img src="{{ url_for('get_image', image_id=product.id) }}" class="card-img-top" width="100%" height="204px">
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <h5 class="card-title">{{ product.title }}</h5>
+      <h6 class="card-title my-2" style="font-size: 1.2em; opacity: 0.7;">{{ product.subtitle }}</h6>
+      <h5 class="card-title my-3"><b>$</b>{{ product.price }}0 </h5>
+    </div>
+  </div>
+    <hr style="margin-top: 17px">
+
+    {% endfor %}
+</div>
+  <hr>
+
 <div class="container my-4" style="display: flex; justify-content: flex-start ">
 {% for product in cart_products %}
   <div class="card mx-3" style="width: 18rem;">
@@ -9,6 +33,7 @@
     <h5 class="card-title">{{ product.title }}</h5>
     <h5 class="card-title">{{ product.price }}0 <b>$</b></h5>
     <a href="{{ url_for('delete_from_cart', product_id=product.id) }}" class="btn btn-primary wishlist-delete">Delete</a>
+    <a href="#" class="btn btn-primary wishlist-delete">Checkout</a>
   </div>
 </div>
 {% endfor %}

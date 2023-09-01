@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap5
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models import db, Product, User, wishlist_table
+from models import db, Product, User
 from forms import AddProductForm, RegistrationForm, Loginform
 from admin import admin_only
 
