@@ -176,9 +176,10 @@ def add_to_cart(product_id):
 
 @app.route('/delete/<int:product_id>')
 def delete_product(product_id):
-    product_to_delete = db.get_or_404(Product, product_id)
-    db.session.delete(product_to_delete)
-    db.session.commit()
+    product_to_delete = db.session.query(Product).filter_by(id=product_id).first()
+    if product_to_delete in current_user.wishlist:
+        db.session.delete(product_to_delete)
+        db.session.commit()
     return redirect(url_for('index'))
 
 

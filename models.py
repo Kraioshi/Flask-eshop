@@ -6,14 +6,14 @@ db = SQLAlchemy()
 
 wishlist_table = db.Table(
     'wishlist_table',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('product_id', db.Integer, db.ForeignKey('products.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True, ),
+    db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True)
 )
 
 cart_table = db.Table(
     'cart_table',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('product_id', db.Integer, db.ForeignKey('products.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True)
 )
 
 
