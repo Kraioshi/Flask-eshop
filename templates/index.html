@@ -4,6 +4,15 @@
 
 {% block content %}
 
+<div class="container my-3">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p class="flash-text">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
 
 <div class="album py-5 bg-body-tertiary">
     <div class="container-fluid">

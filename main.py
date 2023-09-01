@@ -154,10 +154,13 @@ def wishlist():
 def add_to_wishlist(product_id):
     if current_user.is_authenticated:
         requested_product = db.get_or_404(Product, product_id)
-        if requested_product:
+        if requested_product not in current_user.wishlist:
             current_user.wishlist.append(requested_product)
             db.session.commit()
-        return redirect(url_for('wishlist'))
+            return redirect(url_for('wishlist'))
+        else:
+            flash("You have already added this product to your wishlist")
+            
     flash("You have to be logged in to add products to wishlist")
     return redirect(url_for('login_get'))
 
@@ -165,21 +168,25 @@ def add_to_wishlist(product_id):
 @app.route("/add_to_cart/<int:product_id>")
 def add_to_cart(product_id):
     if current_user.is_authenticated:
-        requested_product = db.get_or_404(Product, product_id)
-        if requested_product:
+        requested_product = db.session.query(Product).filter_by(id=product_id).first()
+
+        if requested_product not in current_user.cart:
             current_user.cart.append(requested_product)
             db.session.commit()
-        return redirect(url_for('cart'))
+            return redirect(url_for('cart'))
+        else:
+            flash("You have already added this product to your cart")
+            return redirect(url_for('index'))
+
     flash("You have to be logged in to add products to wishlist")
     return redirect(url_for('login_get'))
 
 
 @app.route('/delete/<int:product_id>')
 def delete_product(product_id):
-    product_to_delete = db.session.query(Product).filter_by(id=product_id).first()
-    if product_to_delete in current_user.wishlist:
-        db.session.delete(product_to_delete)
-        db.session.commit()
+    product_to_delete = db.get_or_404(Product, product_id)
+    db.session.delete(product_to_delete)
+    db.session.commit()
     return redirect(url_for('index'))
 
 
