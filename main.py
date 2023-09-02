@@ -119,7 +119,7 @@ def add_product_post():
             description=add_product_form.description.data,
             price=add_product_form.price.data,
             quantity=add_product_form.quantity.data,
-            image_data=add_product_form.image.data.read()
+            image_path=add_product_form.image.data
         )
 
         db.session.add(new_product)
@@ -154,13 +154,14 @@ def wishlist():
 def add_to_wishlist(product_id):
     if current_user.is_authenticated:
         requested_product = db.get_or_404(Product, product_id)
+
         if requested_product not in current_user.wishlist:
             current_user.wishlist.append(requested_product)
             db.session.commit()
             return redirect(url_for('wishlist'))
         else:
             flash("You have already added this product to your wishlist")
-            
+
     flash("You have to be logged in to add products to wishlist")
     return redirect(url_for('login_get'))
 
@@ -168,7 +169,7 @@ def add_to_wishlist(product_id):
 @app.route("/add_to_cart/<int:product_id>")
 def add_to_cart(product_id):
     if current_user.is_authenticated:
-        requested_product = db.session.query(Product).filter_by(id=product_id).first()
+        requested_product = db.get_or_404(Product, product_id)
 
         if requested_product not in current_user.cart:
             current_user.cart.append(requested_product)

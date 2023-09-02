@@ -33,10 +33,11 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250), nullable=False)
     subtitle = db.Column(db.String(250), nullable=False)
-    description = db.Column(db.String)
+    description = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    image_data = db.Column(db.LargeBinary, nullable=False)
+    # image_data = db.Column(db.LargeBinary, nullable=False)
+    image_path = db.Column(db.String(255), nullable=False)
 
     wishlist_user = relationship('User', secondary=wishlist_table, back_populates='wishlist')
     cart_user = relationship('User', secondary=cart_table, back_populates='cart')

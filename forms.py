@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, FloatField,\
-                    IntegerField, TextAreaField, EmailField, FileField
+from wtforms import StringField, SubmitField, PasswordField, FloatField, \
+    IntegerField, TextAreaField, EmailField, FileField
 from wtforms.validators import DataRequired, URL, Length, EqualTo, InputRequired
 
 
@@ -16,7 +16,8 @@ class AddProductForm(FlaskForm):
                        render_kw={'placeholder': 'Price'})
     quantity = IntegerField("Quantity", validators=[DataRequired()],
                             render_kw={'placeholder': 'Quantity'})
-    image = FileField("Upload Image")
+    image = StringField("Image Path", validators=[DataRequired()],
+                        render_kw={'placeholder': 'Image Path'})
     submit = SubmitField("Add Product",
                          render_kw={'class': 'add-product-submit'})
 
