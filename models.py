@@ -6,19 +6,19 @@ db = SQLAlchemy()
 
 wishlist_table = db.Table(
     'wishlist_table',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True, ),
-    db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True)
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True, ),
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True)
 )
 
 cart_table = db.Table(
     'cart_table',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True)
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True)
 )
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -29,14 +29,13 @@ class User(db.Model, UserMixin):
 
 
 class Product(db.Model):
-    __tablename__ = 'products'
+    __tablename__ = 'product'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250), nullable=False)
     subtitle = db.Column(db.String(250), nullable=False)
     description = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    # image_data = db.Column(db.LargeBinary, nullable=False)
     image_path = db.Column(db.String(255), nullable=False)
 
     wishlist_user = relationship('User', secondary=wishlist_table, back_populates='wishlist')
