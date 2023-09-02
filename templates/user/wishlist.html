@@ -8,7 +8,7 @@
  class="card-img-top" width="100%" height="204px" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ product.title }}</h5>
-    <h5 class="card-title">{{ product.price }}0 <b>$</b></h5>
+    <h5 class="card-title"> <b>$</b>{{ product.price }}</h5>
     <a href="{{url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary wishlist-add">Add to Cart</a>
     <a href="{{ url_for('delete_from_wishlist', product_id=product.id) }}" class="btn btn-primary wishlist-delete">Delete</a>
   </div>

@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
+from decimal import Decimal
 
 db = SQLAlchemy()
 
@@ -34,7 +35,7 @@ class Product(db.Model):
     title = db.Column(db.String(250), nullable=False)
     subtitle = db.Column(db.String(250), nullable=False)
     description = db.Column(db.String, nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    price = db.Column(db.DECIMAL(precision=10, scale=2), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     image_path = db.Column(db.String(255), nullable=False)
 
