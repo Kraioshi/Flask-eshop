@@ -3,17 +3,25 @@ from flask_bootstrap import Bootstrap5
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
+from dotenv import load_dotenv
+import os
 
 from models import db, Product, User
 from forms import AddProductForm, RegistrationForm, Loginform, ContactForm
 from admin import admin_only
 
+load_dotenv()
+
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
 
-app.config["SECRET_KEY"] = 'verysecret'
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///shop.db"
-
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
+app.config['MAIL_SERVER'] = os.getenv("MAIL_SERVER")
+app.config['MAIL_PORT'] = os.getenv("MAIL_PORT")
+app.config['MAIL_USE_SSL'] = os.getenv("MAIL_USE_SSL")
+app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
 
 mail = Mail(app)
 db.init_app(app)
@@ -237,8 +245,8 @@ def send_email():
                        f"{sender_message}"
 
         message = Message(subject=f"New message from {sender_name}",
-                          sender=app.config["MAIL_USERNAME"],
-                          recipients=[app.config["MAIL_USERNAME"]],
+                          sender=os.getenv("MAIL_USERNAME"),
+                          recipients=[os.getenv("MAIL_USERNAME")],
                           body=message_body)
 
         mail.send(message)
