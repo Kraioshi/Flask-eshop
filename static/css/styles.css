@@ -110,6 +110,10 @@ margin-right: -5px;
     padding: 10px;
 }
 
+/* SEND EMAIL */
+.send-email-submit {
+    width: 100%;
+}
 /* FLASH MESSAGES */
 .flash-text {
     color: #ee6f57;
@@ -117,5 +121,4 @@ margin-right: -5px;
     font-size: 1.2em;
 }
 
-/* WISHLIST LIST ELEMENT */
 

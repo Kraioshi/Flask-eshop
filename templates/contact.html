@@ -1,8 +1,23 @@
+{% from "bootstrap5/form.html" import render_form %}
+
 {% extends 'base.html' %}
 
 {% block title %} Contact {% endblock %}
 
 {% block content %}
 
+<div class="container justify-content: center my-3">
+      <div class="registration-form">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                <p class="flash-text">{{ message }}</p>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <h2 class="register-text">Contact Us!</h2>
+            {{ render_form(form) }}
+      </div>
 {% endblock %}
 

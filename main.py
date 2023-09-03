@@ -4,7 +4,7 @@ from flask_login import login_user, LoginManager, current_user, logout_user, log
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db, Product, User
-from forms import AddProductForm, RegistrationForm, Loginform
+from forms import AddProductForm, RegistrationForm, Loginform, ContactForm
 from admin import admin_only
 
 app = Flask(__name__)
@@ -216,8 +216,11 @@ def get_image(image_id):
 
 
 @app.route("/contact")
-def contact():
-    return render_template('contact.html')
+def contact_get():
+    contact_form = ContactForm()
+    return render_template('contact.html', form=contact_form)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, FloatField, \
-    IntegerField, TextAreaField, EmailField, FileField
+from wtforms import StringField, SubmitField, PasswordField, IntegerField,\
+                    TextAreaField, EmailField, DecimalField
 from wtforms.validators import DataRequired, URL, Length, EqualTo, InputRequired
 
 
@@ -12,8 +12,8 @@ class AddProductForm(FlaskForm):
     description = TextAreaField("Product Description", validators=[DataRequired()],
                                 render_kw={"style": "height: 120px;",
                                            'placeholder': 'Product Description'})
-    price = FloatField("Price", validators=[DataRequired()],
-                       render_kw={'placeholder': 'Price'})
+    price = DecimalField("Price", validators=[DataRequired()],
+                         render_kw={'placeholder': 'Price'})
     quantity = IntegerField("Quantity", validators=[DataRequired()],
                             render_kw={'placeholder': 'Quantity'})
     image = StringField("Image Path", validators=[DataRequired()],
@@ -48,3 +48,11 @@ class Loginform(FlaskForm):
                                         'class': 'login-password'})
 
     submit = SubmitField("Sign Up", render_kw={'class': 'login-submit'})
+
+
+class ContactForm(FlaskForm):
+    message = TextAreaField("Your Message", validators=[DataRequired()],
+                            render_kw={"style": "height: 120px;",
+                                       'placeholder': 'Your Message'})
+
+    submit = SubmitField("Send Email", render_kw={'class': 'send-email-submit'})
