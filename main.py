@@ -1,27 +1,22 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
-from dotenv import load_dotenv
 import os
 
 from models import db, Product, User
 from forms import AddProductForm, RegistrationForm, Loginform, ContactForm
 from admin import admin_only
+from config import Config
 
-load_dotenv()
 
 app = Flask(__name__)
+
+app.config.from_object(Config)
+
 bootstrap = Bootstrap5(app)
 
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
-app.config['MAIL_SERVER'] = os.getenv("MAIL_SERVER")
-app.config['MAIL_PORT'] = os.getenv("MAIL_PORT")
-app.config['MAIL_USE_SSL'] = os.getenv("MAIL_USE_SSL")
-app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
-app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
 
 mail = Mail(app)
 db.init_app(app)
