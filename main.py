@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap5
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,6 +16,7 @@ db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login_get'
 
 
 @login_manager.user_loader
@@ -151,35 +152,32 @@ def wishlist():
 
 
 @app.route('/add_to_wishlist/<int:product_id>')
+@login_required
 def add_to_wishlist(product_id):
-    if current_user.is_authenticated:
-        requested_product = db.get_or_404(Product, product_id)
+    requested_product = db.get_or_404(Product, product_id)
 
-        if requested_product not in current_user.wishlist:
-            current_user.wishlist.append(requested_product)
-            db.session.commit()
-            return redirect(url_for('wishlist'))
-        else:
-            flash("You have already added this product to your wishlist")
+    if requested_product not in current_user.wishlist:
+        current_user.wishlist.append(requested_product)
+        db.session.commit()
+        return redirect(url_for('wishlist'))
+    else:
+        flash("You have already added this product to your wishlist")
 
-    flash("You have to be logged in to add products to wishlist")
     return redirect(url_for('login_get'))
 
 
 @app.route("/add_to_cart/<int:product_id>")
+@login_required
 def add_to_cart(product_id):
-    if current_user.is_authenticated:
-        requested_product = db.get_or_404(Product, product_id)
+    requested_product = db.get_or_404(Product, product_id)
 
-        if requested_product not in current_user.cart:
-            current_user.cart.append(requested_product)
-            db.session.commit()
-            return redirect(url_for('cart'))
-        else:
-            flash("You have already added this product to your cart")
-            return redirect(url_for('index'))
+    if requested_product not in current_user.cart:
+        current_user.cart.append(requested_product)
+        db.session.commit()
+        return redirect(url_for('cart'))
+    else:
+        flash("You have already added this product to your cart")
 
-    flash("You have to be logged in to add products to wishlist")
     return redirect(url_for('login_get'))
 
 
