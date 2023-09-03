@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap5
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_mail import Mail, Message
 
 from models import db, Product, User
 from forms import AddProductForm, RegistrationForm, Loginform, ContactForm
@@ -12,6 +13,9 @@ bootstrap = Bootstrap5(app)
 
 app.config["SECRET_KEY"] = 'verysecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///shop.db"
+
+
+mail = Mail(app)
 db.init_app(app)
 
 login_manager = LoginManager()
@@ -215,12 +219,33 @@ def get_image(image_id):
     return app.response_class(image.image_data, content_type='image/jpeg')
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET"])
 def contact_get():
     contact_form = ContactForm()
     return render_template('contact.html', form=contact_form)
 
 
+@app.route('/contact', methods=["POST"])
+def send_email():
+    contact_form = ContactForm()
+    if contact_form.validate_on_submit():
+        sender_name = current_user.name
+        sender_email = current_user.email
+        sender_message = contact_form.message.data
+
+        message_body = f"New Message From {sender_email}\n\n" \
+                       f"{sender_message}"
+
+        message = Message(subject=f"New message from {sender_name}",
+                          sender=app.config["MAIL_USERNAME"],
+                          recipients=[app.config["MAIL_USERNAME"]],
+                          body=message_body)
+
+        mail.send(message)
+
+        flash("Your message has been sent successfully")
+        return redirect(url_for('contact_get'))
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
