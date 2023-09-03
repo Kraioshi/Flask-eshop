@@ -215,5 +215,9 @@ def get_image(image_id):
     return app.response_class(image.image_data, content_type='image/jpeg')
 
 
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
+
 if __name__ == "__main__":
     app.run(debug=True)

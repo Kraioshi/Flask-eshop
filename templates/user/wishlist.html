@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+Your Wishlist
+{% endblock %}
+
 {% block content %}
 <div class="container my-4" style="display: flex; justify-content: flex-start ">
 {% for product in wishlist_products %}
