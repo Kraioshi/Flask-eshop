@@ -7,4 +7,4 @@ logout_bp = Blueprint('logout', __name__)
 @logout_bp.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('index.index'))

@@ -7,7 +7,7 @@ from app.models import db
 from app.models.models import User
 
 
-login_bp = Blueprint('login', __name__)
+login_bp = Blueprint('login', __name__, template_folder='templates')
 
 
 @login_bp.route('/login', methods=["GET"])
@@ -30,4 +30,4 @@ def login_post():
 
         else:
             login_user(existing_user)
-            return redirect(url_for('index'))
+            return redirect(url_for('index.index'))

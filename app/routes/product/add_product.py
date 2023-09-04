@@ -32,4 +32,4 @@ def add_product_post():
 
         db.session.add(new_product)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('index.index'))

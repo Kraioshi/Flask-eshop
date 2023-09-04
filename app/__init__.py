@@ -16,6 +16,18 @@ from app.routes.index.index import index_bp
 
 from app.routes.product.add_product import add_product_bp
 from app.routes.product.get_product import get_product_bp
+from app.routes.product.delete_product import delete_product_bp
+
+from app.routes.user.user import user_bp
+from app.routes.user.cart import cart_bp
+from app.routes.user.wishlist import wishlist_bp
+from app.routes.user.add_to_cart import add_to_cart_bp
+from app.routes.user.delete_from_cart import delete_from_cart_bp
+from app.routes.user.add_to_wishlist import add_to_wish_bp
+from app.routes.user.delete_from_wishlist import delete_from_wish_bp
+
+from app.routes.contact.contact_get import contact_bp
+from app.routes.contact.send_email import send_email_bp
 
 
 def create_app():
@@ -30,6 +42,18 @@ def create_app():
 
     app.register_blueprint(add_product_bp)
     app.register_blueprint(get_product_bp)
+    app.register_blueprint(delete_product_bp)
+
+    app.register_blueprint(user_bp)
+    app.register_blueprint(cart_bp)
+    app.register_blueprint(wishlist_bp)
+    app.register_blueprint(add_to_cart_bp)
+    app.register_blueprint(add_to_wish_bp)
+    app.register_blueprint(delete_from_cart_bp)
+    app.register_blueprint(delete_from_wish_bp)
+
+    app.register_blueprint(contact_bp)
+    app.register_blueprint(send_email_bp)
 
     # Configuration
     app.config.from_object(Config)
@@ -40,7 +64,7 @@ def create_app():
     # Initialize the LoginManager
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'login_get'
+    login_manager.login_view = 'login.login_get'
 
     @login_manager.user_loader
     def load_user(user_id):

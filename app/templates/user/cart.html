@@ -27,7 +27,7 @@ Your Shopping Cart
       <h5 class="card-title">{{ product.title }}</h5>
       <h6 class="card-title my-2" style="font-size: 1.2em; opacity: 0.7;">{{ product.subtitle }}</h6>
       <h5 class="card-title my-3"><b>$</b>{{ product.price }} </h5>
-      <a href="{{ url_for('delete_from_cart', product_id=product.id) }}"
+      <a href="{{ url_for('delete_from_cart.delete_from_cart', product_id=product.id) }}"
          style="color: red; text-decoration: none;">
         Remove
       </a>
@@ -51,7 +51,7 @@ Your Shopping Cart
   {% else %}
     <p style="text-align: center;">Your shopping cart is currently empty!</p>
     <p style="text-align: center;">
-      <a href="{{ url_for('index') }}" style="text-decoration: none;">Click here</a>
+      <a href="{{ url_for('index.index') }}" style="text-decoration: none;">Click here</a>
       to start shopping
     </p>
   {% endif %}
