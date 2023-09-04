@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user
 from werkzeug.security import check_password_hash
-from flask_bootstrap import Bootstrap5
 
 from app.forms.login_form import Loginform
 from app.models import db
