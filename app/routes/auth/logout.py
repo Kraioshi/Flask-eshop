@@ -1,10 +1,10 @@
 from flask import Blueprint, redirect, url_for
 from flask_login import logout_user
 
-logout_blueprint = Blueprint('logout', __name__)
+logout_bp = Blueprint('logout', __name__)
 
 
-@logout_blueprint.route('/logout')
+@logout_bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))

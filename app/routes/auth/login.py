@@ -6,16 +6,17 @@ from app.forms.login_form import Loginform
 from app.models import db
 from app.models.models import User
 
-login_blueprint = Blueprint('login', __name__)
+
+login_bp = Blueprint('login', __name__)
 
 
-@login_blueprint.route('/login', methods=["GET"])
+@login_bp.route('/login', methods=["GET"])
 def login_get():
     login_form = Loginform()
     return render_template("auth/login.html", form=login_form)
 
 
-@login_blueprint.route('/login', methods=["POST"])
+@login_bp.route('/login', methods=["POST"])
 def login_post():
     login_form = Loginform()
     if login_form.validate_on_submit():

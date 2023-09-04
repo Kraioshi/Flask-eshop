@@ -4,10 +4,10 @@ from flask_login import current_user
 from app.models import db
 from app.models.models import Product
 
-index_blueprint = Blueprint('index', __name__)
+index_bp = Blueprint('index', __name__)
 
 
-@index_blueprint.route('/')
+@index_bp.route('/')
 def index():
     result = db.session.execute(db.Select(Product))
     all_products = result.scalars().all()
