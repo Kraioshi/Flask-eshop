@@ -1,21 +1,22 @@
-from flask import Blueprint, render_template
-from flask import Flask, render_template, redirect, url_for, flash
-from flask_bootstrap import Bootstrap5
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user
 from werkzeug.security import check_password_hash
+from flask_bootstrap import Bootstrap5
 
 from app.forms.login_form import Loginform
 from app.models import db
-from app.models.user import User
+from app.models.models import User
+
+login_blueprint = Blueprint('login', __name__)
 
 
-@app.route('/login', methods=["GET"])
+@login_blueprint.route('/login', methods=["GET"])
 def login_get():
     login_form = Loginform()
     return render_template("auth/login.html", form=login_form)
 
 
-@app.route('/login', methods=["POST"])
+@login_blueprint.route('/login', methods=["POST"])
 def login_post():
     login_form = Loginform()
     if login_form.validate_on_submit():
