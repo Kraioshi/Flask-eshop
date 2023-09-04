@@ -1,0 +1,3 @@
+[flake8]
+exclude = .git,.idea,venv, app/__init__.py
+max-line-length = 120

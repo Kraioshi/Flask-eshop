@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
+from flask_login import login_user
+
 from app.forms.registration_form import RegistrationForm
 from werkzeug.security import generate_password_hash
 

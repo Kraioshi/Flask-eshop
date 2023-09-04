@@ -3,7 +3,6 @@ from flask_mail import Mail
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap5
 
-
 from app.models import db
 from app.models.models import User, Product, wishlist_table, cart_table
 from config import Config
@@ -32,7 +31,6 @@ from app.routes.contact.send_email import send_email_bp
 
 def create_app():
     app = Flask(__name__, template_folder='templates')
-
 
     # Blueprint registration
     app.register_blueprint(login_bp)

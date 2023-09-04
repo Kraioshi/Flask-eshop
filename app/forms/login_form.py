@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, PasswordField, EmailField
-from wtforms.validators import DataRequired, URL, Length, EqualTo, InputRequired
+from wtforms.validators import DataRequired, Length, InputRequired
 
 
 class Loginform(FlaskForm):

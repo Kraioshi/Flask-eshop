@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, url_for, flash, current_app
 from flask_login import current_user
-from flask_mail import Message, Mail
+from flask_mail import Message
 import os
 
 from app.forms.contact_form import ContactForm

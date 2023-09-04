@@ -17,5 +17,4 @@ def add_to_wishlist(product_id):
         return redirect(url_for('wishlist.wishlist'))
     else:
         flash("You have already added this product to your wishlist")
-
-    return redirect(url_for('login.login_get'))
+        return redirect(url_for('index.index'))
