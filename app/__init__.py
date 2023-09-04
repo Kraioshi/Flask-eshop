@@ -1,6 +1,6 @@
-from flask import Flask, Blueprint
-from flask_mail import Mail, Message
-from flask_login import login_user, LoginManager, current_user, logout_user, login_required
+from flask import Flask
+from flask_mail import Mail
+from flask_login import LoginManager
 from flask_bootstrap import Bootstrap5
 
 
@@ -33,6 +33,7 @@ from app.routes.contact.send_email import send_email_bp
 def create_app():
     app = Flask(__name__, template_folder='templates')
 
+
     # Blueprint registration
     app.register_blueprint(login_bp)
     app.register_blueprint(register_bp)
@@ -58,7 +59,6 @@ def create_app():
     # Configuration
     app.config.from_object(Config)
 
-    mail = Mail(app)
     db.init_app(app)
 
     # Initialize the LoginManager
@@ -76,5 +76,7 @@ def create_app():
 
     # Bootstrap
     bootstrap = Bootstrap5(app)
+
+    mail = Mail(app)
 
     return app

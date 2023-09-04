@@ -1,6 +1,6 @@
-from flask import Blueprint, redirect, url_for, flash
+from flask import Blueprint, redirect, url_for, flash, current_app
 from flask_login import current_user
-from flask_mail import Message
+from flask_mail import Message, Mail
 import os
 
 from app.forms.contact_form import ContactForm
@@ -24,7 +24,8 @@ def send_email():
                           recipients=[os.getenv("MAIL_USERNAME")],
                           body=message_body)
 
+        mail = current_app.extensions.get('mail')
         mail.send(message)
 
         flash("Your message has been sent successfully")
-        return redirect(url_for('contact_get'))
+        return redirect(url_for('contact.contact_get'))
