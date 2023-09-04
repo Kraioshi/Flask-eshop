@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<div class="container my-3">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p class="flash-text">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container-fluid">
+        <div class="row">
+            {% for product in products %}
+            <div class="col">
+                  <div class="card shadow-sm" style="width: 21rem;">
+                      <a href="{{url_for('product_get', product_id=product.id)  }}">
+                    <img src="{{ url_for('static', filename='assets/img/' + product.image_path) }}"
+                         width="100%" height="204px" class="card-img-top">
+                          </a>
+                    <div class="card-body">
+                      <div style="display: flex; justify-content: space-between;">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text"><b>${{ product.price }}</b> </p>
+                      </div>
+                      <div style="display: flex; justify-content: space-between;">
+                        <p class="card-subtitle">{{ product.subtitle }}</p>
+                      </div>
+                <!-- HOVER PART -->
+                      <div style="display: flex">
+                          <a class="add-to-cart-anchor" href="{{url_for('add_to_cart', product_id=product.id) }}">
+                              <i class="fa-solid fa-cart-plus"></i>
+                          </a>
+
+                          <a class="add-to-wish-anchor" href="{{url_for('add_to_wishlist', product_id=product.id) }}">
+                              <i class="fa-solid fa-heart"></i>
+                          </a>
+
+                          {% if current_user.id == 1 %}
+                          <a class="delete-product-anchor"
+                              href="{{url_for('delete_product', product_id=product.id) }}">
+                              <i class="fa-solid fa-trash"></i>
+                          </a>
+                          {% endif %}
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+    {% endblock %}
+
