@@ -1,4 +1,3 @@
 from flask import Blueprint
-from . import login, register, logout
 
-auth_bp = Blueprint('auth', __name__)
+auth_blueprint = Blueprint('auth', __name__)
