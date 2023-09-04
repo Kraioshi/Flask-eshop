@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap5
 
 from app.models import db
 from app.models.models import User, Product, wishlist_table, cart_table
-from app.config import Config
+from config import Config
 
 from app.routes.auth.login import login_bp
 from app.routes.auth.register import register_bp

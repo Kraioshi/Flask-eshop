@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 
 from app.forms.add_product_form import AddProductForm
-from app.admin import admin_only
+from app.decorators.admin import admin_only
 
 from app.models import db
 from app.models.models import Product
