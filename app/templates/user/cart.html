@@ -10,13 +10,14 @@ Your Shopping Cart
 
 <h3 style="text-align: center;">Shopping Cart</h3>
 
-<div class="container" style="display: flex;">
+<div class="container" style="display: flex; align-items: flex-start;">
 
 
 
 <div class="container" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;
                               padding-top: 10px; margin-top: 10px; margin-bottom: 20px;
                               max-width: 60%;">
+
   {% for product in cart_products %}
   <div class="row" style="max-width: 1000px;">
     <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
@@ -62,20 +63,25 @@ Your Shopping Cart
 {% if cart_products %}
 <div class="px-3" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;
                          padding-top: 10px; margin-top: 10px; margin-bottom: 20px;
-                         height:225px;">
+                         ">
   <h5>
     Subtotal ({{ cart_size }} items):
     <b>${{cart_products | sum('price') }}</b>
   </h5>
 
-  {% for product in cart_product %}
-  <p>{{ product.title }}</p>
-  <p>Hello</p>
+  {% for product in cart_products %}
+  <ul>
+    <li>
+      <p>{{ product.title }} - {{ product.price }}</p>
+    </li>
+  </ul>
+
+
   {% endfor %}
 
   <button>Proceed to checkout</button>
 </div>
-  {% endif %}
+{% endif %}
 
 
 {% endblock %}
