@@ -29,7 +29,7 @@ from app.blueprints.contact.contact_get import contact_bp
 from app.blueprints.contact.send_email import send_email_bp
 
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__, template_folder='templates')
 
     # Load configuration

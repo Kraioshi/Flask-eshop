@@ -57,11 +57,16 @@ Your Shopping Cart
   {% endif %}
 </div>
 
-<div>
-  <p>Hello</p>
+<div class="px-3" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;
+                         padding-top: 10px; margin-top: 10px; margin-bottom: 20px;
+                         height:225px;">
+  {% if cart_products %}
+  <h5>
+    Subtotal ({{ cart_size }} items):
+    <b>${{cart_products | sum('price') }}</b>
+  </h5>
+  {% endif %}
+  <button>Proceed to checkout</button>
 </div>
-
-</div>
-
 
 {% endblock %}
