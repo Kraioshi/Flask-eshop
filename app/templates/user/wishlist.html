@@ -5,7 +5,13 @@ Your Wishlist
 {% endblock %}
 
 {% block content %}
+<h3 style="text-align: center;">Your Wishlist</h3>
+
+
+{% if wishlist_products %}
+
 <div class="container my-4" style="display: flex; justify-content: flex-start ">
+
 {% for product in wishlist_products %}
   <div class="card mx-3" style="width: 18rem;">
   <img src="{{ url_for('static', filename='assets/img/' + product.image_path) }}"
@@ -18,6 +24,20 @@ Your Wishlist
   </div>
 </div>
 {% endfor %}
+
+{% else %}
+<div class="container" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;
+                              padding-top: 10px; margin-top: 10px; margin-bottom: 20px;
+                              max-width: 60%;">
+
+  <p style="text-align: center;">Your Wishlist is empty!</p>
+    <p style="text-align: center;">
+      <a href="{{ url_for('index.index') }}" style="text-decoration: none;">Click here</a>
+      to start shopping
+    </p>
+  </div>
+{% endif %}
+
 </div>
 
 
