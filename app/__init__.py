@@ -7,26 +7,26 @@ from app.models import db
 from app.models.models import User, Product, wishlist_table, cart_table
 from config import Config
 
-from app.routes.auth.login import login_bp
-from app.routes.auth.register import register_bp
-from app.routes.auth.logout import logout_bp
+from app.blueprints.auth.login import login_bp
+from app.blueprints.auth.register import register_bp
+from app.blueprints.auth.logout import logout_bp
 
-from app.routes.index.index import index_bp
+from app.blueprints.index.index import index_bp
 
-from app.routes.product.add_product import add_product_bp
-from app.routes.product.get_product import get_product_bp
-from app.routes.product.delete_product import delete_product_bp
+from app.blueprints.product.add_product import add_product_bp
+from app.blueprints.product.get_product import get_product_bp
+from app.blueprints.product.delete_product import delete_product_bp
 
-from app.routes.user.user import user_bp
-from app.routes.user.cart import cart_bp
-from app.routes.user.wishlist import wishlist_bp
-from app.routes.user.add_to_cart import add_to_cart_bp
-from app.routes.user.delete_from_cart import delete_from_cart_bp
-from app.routes.user.add_to_wishlist import add_to_wish_bp
-from app.routes.user.delete_from_wishlist import delete_from_wish_bp
+from app.blueprints.user.user import user_bp
+from app.blueprints.user.cart import cart_bp
+from app.blueprints.user.wishlist import wishlist_bp
+from app.blueprints.user.add_to_cart import add_to_cart_bp
+from app.blueprints.user.delete_from_cart import delete_from_cart_bp
+from app.blueprints.user.add_to_wishlist import add_to_wish_bp
+from app.blueprints.user.delete_from_wishlist import delete_from_wish_bp
 
-from app.routes.contact.contact_get import contact_bp
-from app.routes.contact.send_email import send_email_bp
+from app.blueprints.contact.contact_get import contact_bp
+from app.blueprints.contact.send_email import send_email_bp
 
 
 def create_app():
