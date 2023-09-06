@@ -32,6 +32,12 @@ from app.routes.contact.send_email import send_email_bp
 def create_app():
     app = Flask(__name__, template_folder='templates')
 
+    # Load configuration
+    app.config.from_object(Config)
+
+    # Load database
+    db.init_app(app)
+
     # Blueprint registration
     app.register_blueprint(login_bp)
     app.register_blueprint(register_bp)
@@ -53,11 +59,6 @@ def create_app():
 
     app.register_blueprint(contact_bp)
     app.register_blueprint(send_email_bp)
-
-    # Configuration
-    app.config.from_object(Config)
-
-    db.init_app(app)
 
     # Initialize the LoginManager
     login_manager = LoginManager()
