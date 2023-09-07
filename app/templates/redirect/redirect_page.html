@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} Just a moment {% endblock %}
+<meta http-equiv="refresh" content="5;url={{ redirect_url }}">
+
+{% block content %}
+    <p>{{ message }}</p>
+    <p>You will be redirected in 5 seconds. If not, <a href="{{ redirect_url }}">click here</a>.</p>
+{% endblock %}
