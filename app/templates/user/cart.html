@@ -60,32 +60,6 @@ Your Shopping Cart
   </div>
 
 <!-- CHECKOUT -->
-<!--{% if cart_products %}-->
-<!--<div class="px-4 mx-5" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;-->
-<!--                         padding-top: 10px; margin-top: 10px; padding-bottom: 20px;-->
-<!--                         ">-->
-<!--  <h5>-->
-<!--    Subtotal ({{ cart_size }} items):-->
-<!--    <b>${{cart_products | sum('price') }}</b>-->
-<!--  </h5>-->
-<!--  <hr>-->
-
-<!--  {% for product in cart_products %}-->
-<!--  <ul>-->
-<!--    <li>-->
-<!--      <h6>{{ product.title }} - <b>${{ product.price }}</b></h6>-->
-<!--    </li>-->
-<!--  </ul>-->
-
-
-<!--  {% endfor %}-->
-
-<!--  <a class="btn btn-primary proceed-to-checkout-button"-->
-<!--     href="{{ url_for('checkout.checkout_get') }}" role="button">-->
-<!--    Proceed to checkout-->
-<!--  </a>-->
-<!--</div>-->
-<!--{% endif %}-->
 {% if cart_products %}
   <div class="col-md-5 col-lg-4 order-md-last"
   style="margin-top: -7px;">

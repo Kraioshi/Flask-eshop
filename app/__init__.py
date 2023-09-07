@@ -31,7 +31,7 @@ from app.blueprints.contact.send_email import send_email_bp
 from app.blueprints.payment.checkout import checkout_bp
 from app.blueprints.payment.payment import payment_bp
 
-from app.blueprints.redirect.redirect_page import redirect_bp
+from app.blueprints.redirect.redirect_home import redirect_bp
 
 def create_app() -> Flask:
     app = Flask(__name__, template_folder='templates')

@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %} Just a moment {% endblock %}
-<meta http-equiv="refresh" content="5;url={{ redirect_url }}">
+{% block meta %}
+    <meta http-equiv="refresh" content="5; url={{ redirect_url }}">
+{% endblock %}
+
+{% block title %}
+Just a moment
+{% endblock %}
+
 
 {% block content %}
-    <p>{{ message }}</p>
-    <p>You will be redirected in 5 seconds. If not, <a href="{{ redirect_url }}">click here</a>.</p>
+
+<div style="padding-bottom:20px;">
+    <p style="text-align: center; font-size: 1.3em;">{{ message }}</p>
+    <p style="text-align: center; font-size: 1.2em">You will be redirected in 5 seconds. If not, <a href="{{ redirect_url }}">click here</a>.</p>
+</div>
 {% endblock %}

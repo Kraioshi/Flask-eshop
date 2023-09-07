@@ -27,5 +27,5 @@ def send_email():
         mail = current_app.extensions.get('mail')
         mail.send(message)
 
-        flash("Your message has been sent successfully")
-        return redirect(url_for('contact.contact_get'))
+        flash("Your message has been sent successfully!")
+        return redirect(url_for('redirect.redirect_home'))

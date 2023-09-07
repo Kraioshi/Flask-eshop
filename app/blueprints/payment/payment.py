@@ -30,4 +30,5 @@ def payment():
 
     )
 
-    return redirect(url_for('index.index', total_price=total_price))
+    message = "Your payment was successful!"
+    return redirect(url_for('redirect.redirect_home', total_price=total_price, message=message))
