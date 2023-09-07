@@ -13,7 +13,7 @@
       src="https://checkout.stripe.com/checkout.js"
       class="stripe-button"
       data-key="{{public_key}}"
-      data-amount="{{cart_products | sum('price') }}"
+      data-amount="{{ total_price * 100}}"
       data-name="puppy"
       data-description="Description here"
       data-locale="auto"

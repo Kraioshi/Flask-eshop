@@ -15,7 +15,8 @@ checkout_bp = Blueprint('checkout', __name__)
 @checkout_bp.route('/checkout', methods=["GET"])
 @login_required
 def checkout_get():
-    user_cart = current_user.cart
-    return render_template('payment/checkout.html', public_key=public_key, cart_products=user_cart)
+    total_price = sum(item.price for item in current_user.cart)
+
+    return render_template('payment/checkout.html', public_key=public_key, total_price=total_price)
 
 

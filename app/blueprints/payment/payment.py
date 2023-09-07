@@ -15,7 +15,8 @@ payment_bp = Blueprint('payment', __name__)
 
 @payment_bp.route('/payment', methods=["POST"])
 def payment():
-    user_cart = current_user.cart
+    total_price = sum(item.price for item in current_user.cart)
+
     # CUSTOMER INFORMATION
     customer = Customer.create(email=request.form['stripeEmail'],
                                source=request.form['stripeToken'])
@@ -23,10 +24,10 @@ def payment():
     #PAYMENT
     charge = Charge.create(
         customer=customer.id,
-        amount='1999',
+        amount=int(total_price * 100),
         currency='usd',
         description='The Description Here',
 
     )
 
-    return redirect(url_for('index.index'))
+    return redirect(url_for('index.index', total_price=total_price))
