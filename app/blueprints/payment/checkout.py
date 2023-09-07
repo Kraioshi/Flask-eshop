@@ -1,10 +1,13 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 import stripe
+from dotenv import load_dotenv
+import os
 
-public_key = 'pk_test_51NnnjGCKKdvgdbMlhv3RFUkMBwSKj1wArUrXhIPBEaLMH6UHwYlKePmipB4plarS5A7pYjTo24DKWTUXutEQdXNo00jAdYi28v'
-stripe.api_key = 'sk_test_51NnnjGCKKdvgdbMlVHrzh80PDBQY9Fg4FS815OlTzUAKclhDktv7XNaGoBE0tZWetX55tEfFrAnmxPdGEFThjv9M00BdMyO9Lc'
+load_dotenv()
 
+public_key = os.getenv("STRIPE_PUBLIC")
+stripe.api_key = os.getenv("STRIPE_SECRET")
 
 checkout_bp = Blueprint('checkout', __name__)
 
