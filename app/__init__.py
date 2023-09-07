@@ -29,6 +29,7 @@ from app.blueprints.contact.contact_get import contact_bp
 from app.blueprints.contact.send_email import send_email_bp
 
 from app.blueprints.payment.checkout import checkout_bp
+from app.blueprints.payment.payment import payment_bp
 
 
 def create_app() -> Flask:
@@ -63,6 +64,8 @@ def create_app() -> Flask:
     app.register_blueprint(send_email_bp)
 
     app.register_blueprint(checkout_bp)
+
+    app.register_blueprint(payment_bp)
 
     # Initialize the LoginManager
     login_manager = LoginManager()
