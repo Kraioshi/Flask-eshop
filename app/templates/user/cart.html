@@ -60,30 +60,62 @@ Your Shopping Cart
   </div>
 
 <!-- CHECKOUT -->
+<!--{% if cart_products %}-->
+<!--<div class="px-4 mx-5" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;-->
+<!--                         padding-top: 10px; margin-top: 10px; padding-bottom: 20px;-->
+<!--                         ">-->
+<!--  <h5>-->
+<!--    Subtotal ({{ cart_size }} items):-->
+<!--    <b>${{cart_products | sum('price') }}</b>-->
+<!--  </h5>-->
+<!--  <hr>-->
+
+<!--  {% for product in cart_products %}-->
+<!--  <ul>-->
+<!--    <li>-->
+<!--      <h6>{{ product.title }} - <b>${{ product.price }}</b></h6>-->
+<!--    </li>-->
+<!--  </ul>-->
+
+
+<!--  {% endfor %}-->
+
+<!--  <a class="btn btn-primary proceed-to-checkout-button"-->
+<!--     href="{{ url_for('checkout.checkout_get') }}" role="button">-->
+<!--    Proceed to checkout-->
+<!--  </a>-->
+<!--</div>-->
+<!--{% endif %}-->
 {% if cart_products %}
-<div class="px-4 mx-5" style="border: 1px solid rgba(255, 0, 0, .2); background-color: white;
-                         padding-top: 10px; margin-top: 10px; padding-bottom: 20px;
-                         ">
-  <h5>
-    Subtotal ({{ cart_size }} items):
-    <b>${{cart_products | sum('price') }}</b>
-  </h5>
-  <hr>
+  <div class="col-md-5 col-lg-4 order-md-last"
+  style="margin-top: -7px;">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+        </h4>
+        <ul class="list-group mb-3">
+          {% for product in cart_products %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{ product.title }} </h6>
+              <small class="text-body-secondary">{{ product.subtitle }}</small>
+            </div>
+            <span class="text-body-secondary">${{ product.price }}</span>
+          </li>
+          {% endfor %}
 
-  {% for product in cart_products %}
-  <ul>
-    <li>
-      <h6>{{ product.title }} - <b>${{ product.price }}</b></h6>
-    </li>
-  </ul>
+          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+            <span>Total (USD)</span>
+            <strong>${{ cart_products | sum('price') }}</strong>
+          </li>
+        </ul>
 
-
-  {% endfor %}
-
-  <a class="btn btn-primary proceed-to-checkout-button" href="#" role="button">Proceed to checkout</a>
+        <div class="card p-2">
+            <a class="btn btn-primary proceed-to-checkout-button"
+              href="{{ url_for('checkout.checkout_get') }}" role="button">
+              Proceed to checkout
+            </a>
+        </div>
+      </div>
 </div>
 {% endif %}
-
-</div>
 
 {% endblock %}
