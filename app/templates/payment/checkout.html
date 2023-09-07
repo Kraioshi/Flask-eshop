@@ -3,23 +3,46 @@
 {% block title %} Checkout {% endblock %}
 
 {% block content %}
+<div class="container" style="display: flex; justify-content: center;">
+  <div class="col-md-5 col-lg-4 order-md-last"
+  style="margin-top: -7px;">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+        </h4>
+        <ul class="list-group mb-3">
+          {% for product in cart_products %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{ product.title }} </h6>
+              <small class="text-body-secondary">{{ product.subtitle }}</small>
+            </div>
+            <span class="text-body-secondary">${{ product.price }}</span>
+          </li>
+          {% endfor %}
 
-<div class="jumbotron">
-  <h1>Welcome</h1>
-  <h2>Payday</h2>
+          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+            <span>Total (USD)</span>
+            <strong>${{ cart_products | sum('price') }}</strong>
+          </li>
+        </ul>
 
-  <form action="{{url_for('payment.payment') }}" method="POST">
-    <script
-      src="https://checkout.stripe.com/checkout.js"
-      class="stripe-button"
-      data-key="{{public_key}}"
-      data-amount="{{ total_price * 100}}"
-      data-name="puppy"
-      data-description="Description here"
-      data-locale="auto"
-    >
+  <div class="card p-2" style="margin-bottom: 20px;">
+    <form action="{{url_for('payment.payment') }}" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js"
+        class="stripe-button"
+        data-key="{{public_key}}"
+        data-amount="{{ total_price * 100}}"
+        data-name="Card Payment"
+        data-description="It is that simple"
+        data-locale="auto"
+        data-image="{{ url_for('static', filename='assets/icons/dollar.png') }}"
+      >
+      Pay with card
+      </script>
+    </form>
+        </div>
+      </div>
 
-    </script>
-  </form>
+
 </div>
 {% endblock %}
