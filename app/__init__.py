@@ -46,6 +46,8 @@ def create_app() -> Flask:
     db.init_app(app)
 
     # Blueprint registration
+    app.register_blueprint(not_found_bp)
+
     app.register_blueprint(login_bp)
     app.register_blueprint(register_bp)
     app.register_blueprint(logout_bp)
@@ -72,6 +74,7 @@ def create_app() -> Flask:
     app.register_blueprint(payment_bp)
 
     app.register_blueprint(redirect_bp)
+
 
     # Initialize the LoginManager
     login_manager = LoginManager()
