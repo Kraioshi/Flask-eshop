@@ -33,6 +33,9 @@ from app.blueprints.payment.payment import payment_bp
 
 from app.blueprints.redirect.redirect_home import redirect_bp
 
+from app.blueprints.errors.page_not_found import not_found_bp
+
+
 def create_app() -> Flask:
     app = Flask(__name__, template_folder='templates')
 
